@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.constant.Menu;
+import christmas.domain.Customer;
 import christmas.exception.ExceptionHandler;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -18,6 +19,8 @@ public class ChristmasController {
         int date = getDate();
         Map<Menu, Integer> menu = getMenu();
         displayOrderMenu(date, menu);
+        Customer customer = new Customer(date, menu);
+        displayTotalAmount(customer.getTotalOrderAmount());
     }
 
     private int getDate(){
@@ -31,4 +34,9 @@ public class ChristmasController {
     private void displayOrderMenu(int date, Map<Menu, Integer> menu){
         OutputView.printOrderedMenu(date, menu);
     }
+
+    private void displayTotalAmount(long total){
+        OutputView.printTotalAmount(total);
+    }
+
 }

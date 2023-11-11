@@ -27,4 +27,9 @@ public class OutputView {
         System.out.println(String.format(OutputMessage.RESERVATION_DATE.getMessage(), date));
     }
 
+    public static void printTotalAmount(long total){
+        printEmptyLine();
+        System.out.println(String.format(OutputMessage.BEFORE_DISCOUNT_AMOUNT.getMessage(), total));
+    }
+
 }
