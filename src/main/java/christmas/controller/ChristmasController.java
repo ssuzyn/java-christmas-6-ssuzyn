@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.constant.Menu;
 import christmas.exception.ExceptionHandler;
 import christmas.view.InputView;
+import christmas.view.OutputView;
 import java.util.Map;
 
 public class ChristmasController {
@@ -16,13 +17,18 @@ public class ChristmasController {
     public void order(){
         int date = getDate();
         Map<Menu, Integer> menu = getMenu();
+        displayOrderMenu(date, menu);
     }
 
-    public int getDate(){
+    private int getDate(){
         return handler.getResult(InputView::readVisitDate);
     }
 
-    public Map<Menu, Integer> getMenu(){
+    private Map<Menu, Integer> getMenu(){
         return handler.getResult(InputView::readMenu);
+    }
+
+    private void displayOrderMenu(int date, Map<Menu, Integer> menu){
+        OutputView.printOrderedMenu(date, menu);
     }
 }
