@@ -1,6 +1,6 @@
 package christmas;
 
-import christmas.controller.OrderController;
+import christmas.controller.ChristmasController;
 import christmas.exception.ExceptionHandler;
 import christmas.exception.RetryExceptionHandler;
 
@@ -8,7 +8,7 @@ public class Application {
     public static void main(String[] args) {
         ExceptionHandler handler = new RetryExceptionHandler();
 
-        OrderController orderController = new OrderController(handler);
-        orderController.getOrder();
+        ChristmasController controller = new ChristmasController(handler);
+        controller.order();
     }
 }
