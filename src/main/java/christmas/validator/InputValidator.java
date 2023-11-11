@@ -23,6 +23,9 @@ public class InputValidator {
         for (String order : orders) {
             validate(order, orderMenu, uniqueMenu);
         }
+
+        validateMaxOrder(orderMenu);
+
         return orderMenu;
     }
 
@@ -35,7 +38,7 @@ public class InputValidator {
         Menu menu = getMenuByName(menuName);
 
         validateMenuFound(menu);
-        validateMinimumOrder(String.valueOf(quantity));
+        validateMinimumOrder(quantity);
         validateDuplicateMenu(menu, uniqueMenu);
 
         orderMenu.put(menu, Integer.parseInt(quantity));
@@ -70,6 +73,16 @@ public class InputValidator {
             throw new IllegalArgumentException(ErrorCode.MENU_NOT_FOUND.getMessage());
 
         if(Integer.parseInt(quantity) < 1)
+            throw new IllegalArgumentException(ErrorCode.MENU_NOT_FOUND.getMessage());
+    }
+
+    private static void validateMaxOrder(Map<Menu, Integer> orderMenu){
+        int orderCount = 0;
+        for(Menu menu: orderMenu.keySet()) {
+            orderCount += orderMenu.get(menu);
+        }
+
+        if(orderCount > 20)
             throw new IllegalArgumentException(ErrorCode.MENU_NOT_FOUND.getMessage());
     }
 
