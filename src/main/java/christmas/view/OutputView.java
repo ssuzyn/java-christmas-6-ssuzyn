@@ -25,6 +25,15 @@ public class OutputView {
         printOrderedMenu(orderMenu.menu());
     }
 
+    public static void printPreview(BenefitsStorage benefits){
+        printBeforeDiscountAmount(benefits.beforeDiscountAmount());
+        printHasGift(benefits.giftMenu());
+        printBenefitsDetail(benefits.beforeDiscountAmount(), benefits.promotionResult());
+        printTotalBenefits(benefits.totalBenefitAmount());
+        printAfterDiscountAmount(benefits.afterDiscountAmount());
+        printBadge(benefits.determineBadge());
+    }
+
     private static void printOrderedMenu(Map<Menu, Integer> orderMenu){
 
         System.out.println(String.format(OutputMessage.ORDER_MENU_PREFIX.getMessage(),
@@ -33,6 +42,38 @@ public class OutputView {
 
     private static void printDate(int date){
         System.out.println(String.format(OutputMessage.RESERVATION_DATE.getMessage(), date));
+    }
+
+    private static void printBeforeDiscountAmount(long total){
+        System.out.println(String.format(OutputMessage.BEFORE_DISCOUNT_AMOUNT.getMessage(), total));
+    }
+
+    private static void printHasGift(boolean hasGift){
+        printEmptyLine();
+        System.out.println(String.format(OutputMessage.GIVEAWAY_MENU.getMessage(),
+                BenefitsView.giftMenuOutputStatement(hasGift)));
+
+    }
+
+    private static void printBenefitsDetail(long price, HashMap<ChristmasPromotion, Long> result){
+        printEmptyLine();
+        System.out.println(String.format(OutputMessage.BENEFIT_DETAILS_PREFIX.getMessage(),
+                BenefitsView.promotionResultOutputStatement(price, result)));
+    }
+
+    private static void printTotalBenefits(long price){
+        System.out.println(String.format(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage(), price));
+    }
+
+    private static void printAfterDiscountAmount(long price){
+        printEmptyLine();
+        System.out.println(String.format(OutputMessage.AFTER_DISCOUNT_AMOUNT.getMessage(), price));
+    }
+
+    private static void printBadge(Badge badge){
+        printEmptyLine();
+        System.out.println(String.format(OutputMessage.PROMOTION_BADGE.getMessage(),
+                BenefitsView.badgeOutputStatement(badge)));
     }
 
 }

@@ -26,8 +26,15 @@ public class EventPlanner {
     public void findPromotion(Customer customer){
         for(ChristmasPromotion promotion : promotionResult.keySet()){
             checkPromotionConditions(promotion, customer);
-
         }
+    }
+
+    public boolean hasGiftMenu(){
+        return promotionResult.entrySet()
+                .stream()
+                .filter(entry -> entry.getKey() instanceof GiftPromotion)
+                .mapToLong(Map.Entry::getValue)
+                .sum() > 0;
     }
 
     public HashMap<ChristmasPromotion, Long> getPromotionResult(){

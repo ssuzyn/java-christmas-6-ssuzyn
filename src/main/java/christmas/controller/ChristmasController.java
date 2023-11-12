@@ -45,6 +45,7 @@ public class ChristmasController {
         eventPlanner = new EventPlanner();
         eventPlanner.findPromotion(customer);
 
+        previewEventBenefits();
     }
 
     private BenefitsStorage storeBenefits(){
@@ -59,5 +60,10 @@ public class ChristmasController {
         OutputView.printOrder(orderMenu);
     }
 
+
+    private void previewEventBenefits(){
+        BenefitsStorage benefitsStorage = storeBenefits();
+        OutputView.printPreview(benefitsStorage);
+    }
 
 }
