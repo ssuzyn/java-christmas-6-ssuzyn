@@ -1,7 +1,12 @@
 package christmas.view;
 
+import christmas.constant.Badge;
 import christmas.constant.Menu;
 import christmas.constant.OutputMessage;
+import christmas.domain.promotion.ChristmasPromotion;
+import christmas.dto.BenefitsStorage;
+import christmas.dto.OrderMenu;
+import java.util.HashMap;
 import java.util.Map;
 
 public class OutputView {
@@ -14,22 +19,20 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printOrderedMenu(int date, Map<Menu, Integer> orderMenu){
-        printDate(date);
+    public static void printOrder(OrderMenu orderMenu){
+        printDate(orderMenu.date());
         printEmptyLine();
-        System.out.println(OutputMessage.ORDER_MENU_PREFIX.getMessage());
-        for(Menu menu : orderMenu.keySet()){
-            System.out.println(String.format(OutputMessage.ORDER_MENU.getMessage(), menu.getName(), orderMenu.get(menu)));
-        }
+        printOrderedMenu(orderMenu.menu());
+    }
+
+    private static void printOrderedMenu(Map<Menu, Integer> orderMenu){
+
+        System.out.println(String.format(OutputMessage.ORDER_MENU_PREFIX.getMessage(),
+                OrderMenuView.orderMenuOutputStatement(orderMenu)));
     }
 
     private static void printDate(int date){
         System.out.println(String.format(OutputMessage.RESERVATION_DATE.getMessage(), date));
-    }
-
-    public static void printTotalAmount(long total){
-        printEmptyLine();
-        System.out.println(String.format(OutputMessage.BEFORE_DISCOUNT_AMOUNT.getMessage(), total));
     }
 
 }

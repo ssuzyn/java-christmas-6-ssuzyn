@@ -1,8 +1,10 @@
 package christmas.controller;
 
 import christmas.constant.Menu;
+import christmas.dto.BenefitsStorage;
 import christmas.domain.Customer;
 import christmas.domain.EventPlanner;
+import christmas.dto.OrderMenu;
 import christmas.exception.ExceptionHandler;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -10,19 +12,25 @@ import java.util.Map;
 
 public class ChristmasController {
 
-    final private ExceptionHandler handler;
+    private final ExceptionHandler handler;
+    private Customer customer;
+    private EventPlanner eventPlanner;
+
 
     public ChristmasController(ExceptionHandler handler){
         this.handler = handler;
     }
 
+    public void service(){
+        order();
+        searchPromotion(customer);
+    }
     public void order(){
         int date = getDate();
         Map<Menu, Integer> menu = getMenu();
-        Customer customer = new Customer(date, menu);
-        displayOrderMenu(date, menu);
+        customer = new Customer(date, menu);
 
-        searchPromotion(customer);
+        displayOrder(date, menu);
     }
 
     private int getDate(){
@@ -34,18 +42,22 @@ public class ChristmasController {
     }
 
     private void searchPromotion(Customer customer){
-        EventPlanner eventPlanner = new EventPlanner();
+        eventPlanner = new EventPlanner();
         eventPlanner.findPromotion(customer);
 
-        displayTotalAmount(eventPlanner.getTotalOrderAmount());
     }
 
-    private void displayOrderMenu(int date, Map<Menu, Integer> menu){
-        OutputView.printOrderedMenu(date, menu);
+    private BenefitsStorage storeBenefits(){
+        if(eventPlanner.hasGiftMenu()){
+            return new BenefitsStorage(customer.getTotalOrderAmount(), true, eventPlanner.getPromotionResult());
+        }
+        return new BenefitsStorage(customer.getTotalOrderAmount(), false, eventPlanner.getPromotionResult());
     }
 
-    private void displayTotalAmount(long total){
-        OutputView.printTotalAmount(total);
+    private void displayOrder(int date, Map<Menu, Integer> menu){
+        OrderMenu orderMenu = new OrderMenu(date, menu);
+        OutputView.printOrder(orderMenu);
     }
+
 
 }
