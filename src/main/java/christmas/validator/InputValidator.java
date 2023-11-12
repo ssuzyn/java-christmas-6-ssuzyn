@@ -53,7 +53,7 @@ public class InputValidator {
 
     private static void validateInteger(String input){
         if(!input.chars().allMatch(Character::isDigit)){
-            throw new IllegalArgumentException(ErrorCode.NOT_INTEGER.getMessage());
+            throw new IllegalArgumentException(ErrorCode.INVALID_DATE.getMessage());
         }
     }
 
