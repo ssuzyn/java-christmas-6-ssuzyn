@@ -9,6 +9,6 @@ public class Application {
         ExceptionHandler handler = new RetryExceptionHandler();
 
         ChristmasController controller = new ChristmasController(handler);
-        controller.order();
+        controller.service();
     }
 }
