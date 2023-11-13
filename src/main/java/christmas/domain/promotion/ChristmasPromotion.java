@@ -11,14 +11,6 @@ public abstract class ChristmasPromotion {
     protected long discountAmount;
     protected PromotionType promotionType;
 
-    public List<Integer> getPeriod() {
-        return period;
-    }
-
-    public PromotionItem getTargetItems() {
-        return targetItems;
-    }
-
     public long getDiscountAmount() {
         return discountAmount;
     }
