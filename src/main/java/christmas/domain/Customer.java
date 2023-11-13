@@ -10,7 +10,7 @@ public class Customer {
 
     private final int visitDate;
     private final Map<Menu, Integer> orderMenu;
-    private long totalOrderAmount;
+    private final long totalOrderAmount;
 
 
     public Customer(int visitDate, Map<Menu, Integer> orderMenu){

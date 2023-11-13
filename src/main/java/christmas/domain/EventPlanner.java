@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EventPlanner {
-    private HashMap<ChristmasPromotion, Long> promotionResult;
+    private final HashMap<ChristmasPromotion, Long> promotionResult;
 
     public EventPlanner(){
         promotionResult = new HashMap<>();
