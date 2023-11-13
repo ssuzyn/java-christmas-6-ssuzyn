@@ -27,11 +27,13 @@ public class InputValidatorTest extends NsTest {
         });
     }
 
-    @Test
-    @DisplayName("음료만 주문한 경우 예외 테스트")
-    void onlyBeverageOrder() {
+    @ParameterizedTest
+    @DisplayName("음료만 주문한 경우, 메뉴판에 없는 메뉴 주문한 경우,"
+            + "메뉴의 개수가 1이하인 경우, 중복 메뉴를 입력한 경우")
+    @ValueSource(strings = {"제로콜라-3", "마라탕-1", "해산물파스타-0", "시저샐러드-1,시저샐러드-1"})
+    void AllOforderMenuException(String input) {
         assertSimpleTest(() -> {
-            runException("25", "제로콜라-3");
+            runException("25", input);
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
@@ -59,6 +61,7 @@ public class InputValidatorTest extends NsTest {
     private static Stream<String> noPromotionAppliedTestCases() {
         return Stream.of(NO_BENEFITS_AMOUNT, NO_BENEFITS_DETAIL);
     }
+
 
     @Override
     protected void runMain() {
