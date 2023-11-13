@@ -51,14 +51,54 @@ public class BenefitsStorageTest {
     }
 
     @Test
-    @DisplayName("이벤트 배지 결정하는 기능 테스트")
-    void testDetermineBadge() {
-        initPromotionResult();
-        BenefitsStorage benefitsStorage = new BenefitsStorage(12000, false, promotionResult);
+    @DisplayName("별 배지 결정 기능 테스트")
+    void testDetermineBadgeWithStar() {
+        initPromotionResult(6_000);
+        BenefitsStorage benefitsStorage = new BenefitsStorage(20_000, false, promotionResult);
 
         Badge badge = benefitsStorage.determineBadge();
 
         assertThat(badge).isEqualTo(Badge.STAR);
+    }
+
+    @Test
+    @DisplayName("트리 배지 결정 기능 테스트")
+    void testDetermineBadgeWithTree() {
+        initPromotionResult(12_000);
+        BenefitsStorage benefitsStorage = new BenefitsStorage(20_000, false, promotionResult);
+
+        Badge badge = benefitsStorage.determineBadge();
+
+        assertThat(badge).isEqualTo(Badge.TREE);
+    }
+
+    @Test
+    @DisplayName("산타 배지 결정 기능 테스트")
+    void testDetermineBadgeWithSanta() {
+        initPromotionResult(21_000);
+        BenefitsStorage benefitsStorage = new BenefitsStorage(20_000, false, promotionResult);
+
+        Badge badge = benefitsStorage.determineBadge();
+
+        assertThat(badge).isEqualTo(Badge.SANTA);
+    }
+
+    @Test
+    @DisplayName("해당하는 배지가 없는 경우 테스트")
+    void testDetermineBadgeWithNoBadge() {
+        initPromotionResult(4_000);
+        BenefitsStorage benefitsStorage = new BenefitsStorage(4_000, false, promotionResult);
+
+        Badge badge = benefitsStorage.determineBadge();
+
+        assertThat(badge).isEqualTo(Badge.NONE);
+    }
+
+    void initPromotionResult(long totalBenefit) {
+        promotionResult = new HashMap<>();
+        promotionResult.put(new DdayPromotion(), totalBenefit / 3);
+        promotionResult.put(new SpecialPromotion(), totalBenefit / 3);
+        promotionResult.put(new WeekendPromotion(), totalBenefit / 3);
     }
 
     void initPromotionResult(){
