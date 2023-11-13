@@ -27,6 +27,29 @@ public class BenefitsStorageTest {
         assertThat(totalBenefitAmount).isEqualTo(7446L);
     }
 
+    @Test
+    @DisplayName("증정 메뉴 없는 경우 할인 후 결제금액 계산하는 기능 테스트")
+    void testAfterDiscountAmountWithoutGiftMenu() {
+        initPromotionResult();
+        BenefitsStorage benefitsStorage = new BenefitsStorage(20000, false, promotionResult);
+
+        long afterDiscountAmount = benefitsStorage.afterDiscountAmount();
+
+        assertThat(afterDiscountAmount).isEqualTo(20000 - 7446);
+    }
+
+    @Test
+    @DisplayName("증정 메뉴 있는 경우 할인 후 결제금액 계산하는 기능 테스트")
+    void testAfterDiscountAmountWithGiftMenu() {
+        initPromotionResult();
+        promotionResult.put(new GiftPromotion(), 25000L);
+        BenefitsStorage benefitsStorage = new BenefitsStorage(300000, true, promotionResult);
+
+        long afterDiscountAmount = benefitsStorage.afterDiscountAmount();
+
+        assertThat(afterDiscountAmount).isEqualTo(300000 - 7446);
+    }
+
     void initPromotionResult(){
         promotionResult = new HashMap<>();
         promotionResult.put(new DdayPromotion(), 2400L);
