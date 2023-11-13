@@ -6,10 +6,16 @@ import java.util.Arrays;
 
 public class DdayPromotion extends ChristmasPromotion{
 
+    private static final int START_DATE = 1;
+    private static final int END_DATE = 25;
+    private static final int INIT_DISCOUNT_AMOUNT = 1000;
+    private static final int MIN_ORDER_AMOUNT = 10000;
+
+
     public DdayPromotion(){
-        this.period = Arrays.asList(1, 25);
+        this.period = Arrays.asList(START_DATE, END_DATE);
         this.targetItems = PromotionItem.TOTAL_ORDER_AMOUNT;
-        this.discountAmount = 1000;
+        this.discountAmount = INIT_DISCOUNT_AMOUNT;
         this.promotionType = PromotionType.DDAY;
     }
 
@@ -28,7 +34,7 @@ public class DdayPromotion extends ChristmasPromotion{
 
     @Override
     protected boolean isEligibleForPromotion(long orderAmount){
-        return orderAmount >= 10000;
+        return orderAmount >= MIN_ORDER_AMOUNT;
     }
 
     public long getDiscountAmount(int date) {

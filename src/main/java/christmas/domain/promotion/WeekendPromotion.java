@@ -8,10 +8,15 @@ import java.util.Arrays;
 
 public class WeekendPromotion extends ChristmasPromotion{
 
+    private static final int START_DATE = 1;
+    private static final int END_DATE = 31;
+    private static final int INIT_DISCOUNT_AMOUNT = 2023;
+    private static final int MIN_ORDER_AMOUNT = 10000;
+
     public WeekendPromotion(){
-        this.period = Arrays.asList(1, 31);
+        this.period = Arrays.asList(START_DATE, END_DATE);
         this.targetItems = PromotionItem.MAIN_MENU;
-        this.discountAmount = 2023;
+        this.discountAmount = INIT_DISCOUNT_AMOUNT;
         this.promotionType = PromotionType.WEEKEND;
     }
 
@@ -32,7 +37,7 @@ public class WeekendPromotion extends ChristmasPromotion{
 
     @Override
     protected boolean isEligibleForPromotion(long orderAmount){
-        return orderAmount >= 10000;
+        return orderAmount >= MIN_ORDER_AMOUNT;
     }
 
     private boolean isWeekend(LocalDate date) {

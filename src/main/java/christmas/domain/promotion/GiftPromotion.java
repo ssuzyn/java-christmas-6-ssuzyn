@@ -5,12 +5,16 @@ import christmas.constant.PromotionType;
 import java.util.Arrays;
 
 public class GiftPromotion extends ChristmasPromotion{
-    private final long priceThreshold = 120000;
+
+    private static final long PRICETHRESHOLD = 120000;
+    private static final int START_DATE = 1;
+    private static final int END_DATE = 31;
+    private static final int INIT_DISCOUNT_AMOUNT = 25000;
 
     public GiftPromotion(){
-        this.period = Arrays.asList(1, 31);
+        this.period = Arrays.asList(START_DATE, END_DATE);
         this.targetItems = PromotionItem.GIFT_CHAMPAGNE;
-        this.discountAmount = 25000;
+        this.discountAmount = INIT_DISCOUNT_AMOUNT;
         this.promotionType = PromotionType.GIFT;
     }
 
@@ -29,7 +33,7 @@ public class GiftPromotion extends ChristmasPromotion{
 
     @Override
     protected boolean isEligibleForPromotion(long orderAmount){
-        return orderAmount >= priceThreshold;
+        return orderAmount >= PRICETHRESHOLD;
     }
 
 }

@@ -6,10 +6,13 @@ import java.util.Arrays;
 
 public class SpecialPromotion extends ChristmasPromotion{
 
+    private static final int INIT_DISCOUNT_AMOUNT = 1000;
+    private static final int MIN_ORDER_AMOUNT = 10000;
+
     public SpecialPromotion(){
         this.period = Arrays.asList(3, 10, 17, 24, 25, 31);
         this.targetItems = PromotionItem.TOTAL_ORDER_AMOUNT;
-        this.discountAmount = 1000;
+        this.discountAmount = INIT_DISCOUNT_AMOUNT;
         this.promotionType = PromotionType.SPECIAL;
     }
 
@@ -28,7 +31,7 @@ public class SpecialPromotion extends ChristmasPromotion{
 
     @Override
     protected boolean isEligibleForPromotion(long orderAmount){
-        return orderAmount >= 10000;
+        return orderAmount >= MIN_ORDER_AMOUNT;
     }
 
 
