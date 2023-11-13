@@ -35,7 +35,6 @@ public class OutputView {
     }
 
     private static void printOrderedMenu(Map<Menu, Integer> orderMenu){
-
         System.out.println(String.format(OutputMessage.ORDER_MENU_PREFIX.getMessage(),
                 OrderMenuView.orderMenuOutputStatement(orderMenu)));
     }
@@ -49,29 +48,25 @@ public class OutputView {
     }
 
     private static void printHasGift(boolean hasGift){
-        printEmptyLine();
         System.out.println(String.format(OutputMessage.GIVEAWAY_MENU.getMessage(),
                 BenefitsView.giftMenuOutputStatement(hasGift)));
 
     }
 
     private static void printBenefitsDetail(long price, HashMap<ChristmasPromotion, Long> result){
-        printEmptyLine();
         System.out.println(String.format(OutputMessage.BENEFIT_DETAILS_PREFIX.getMessage(),
                 BenefitsView.promotionResultOutputStatement(price, result)));
     }
 
     private static void printTotalBenefits(long price){
-        System.out.println(String.format(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage(), price));
+        System.out.println(String.format(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage(), -price));
     }
 
     private static void printAfterDiscountAmount(long price){
-        printEmptyLine();
         System.out.println(String.format(OutputMessage.AFTER_DISCOUNT_AMOUNT.getMessage(), price));
     }
 
     private static void printBadge(Badge badge){
-        printEmptyLine();
         System.out.println(String.format(OutputMessage.PROMOTION_BADGE.getMessage(),
                 BenefitsView.badgeOutputStatement(badge)));
     }
