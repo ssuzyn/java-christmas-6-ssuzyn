@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class InputValidatorTest extends NsTest {
 
@@ -32,6 +33,16 @@ public class InputValidatorTest extends NsTest {
         assertSimpleTest(() -> {
             runException("25", "제로콜라-3");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @ParameterizedTest
+    @DisplayName("1 이상 31 이하의 날짜가 아닌 경우 예외 테스트")
+    @ValueSource(strings = {"0", "32", "1235"})
+    void NumberInDecember(String input){
+        assertSimpleTest(() -> {
+            runException(input, "티본스테이크-1,아이스크림-1");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         });
     }
 
