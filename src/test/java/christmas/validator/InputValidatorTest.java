@@ -26,6 +26,15 @@ public class InputValidatorTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("음료만 주문한 경우 예외 테스트")
+    void onlyBeverageOrder() {
+        assertSimpleTest(() -> {
+            runException("25", "제로콜라-3");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
     @ParameterizedTest
     @DisplayName("적용된 이벤트가 하나도 없는 경우 출력 테스트")
     @MethodSource("noPromotionAppliedTestCases")
