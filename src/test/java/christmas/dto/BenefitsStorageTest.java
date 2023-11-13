@@ -50,6 +50,17 @@ public class BenefitsStorageTest {
         assertThat(afterDiscountAmount).isEqualTo(300000 - 7446);
     }
 
+    @Test
+    @DisplayName("이벤트 배지 결정하는 기능 테스트")
+    void testDetermineBadge() {
+        initPromotionResult();
+        BenefitsStorage benefitsStorage = new BenefitsStorage(12000, false, promotionResult);
+
+        Badge badge = benefitsStorage.determineBadge();
+
+        assertThat(badge).isEqualTo(Badge.STAR);
+    }
+
     void initPromotionResult(){
         promotionResult = new HashMap<>();
         promotionResult.put(new DdayPromotion(), 2400L);
