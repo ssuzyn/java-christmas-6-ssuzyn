@@ -25,6 +25,7 @@ public class ChristmasController {
         order();
         searchPromotion(customer);
     }
+
     public void order(){
         int date = getDate();
         Map<Menu, Integer> menu = getMenu();
