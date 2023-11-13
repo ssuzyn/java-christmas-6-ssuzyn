@@ -33,9 +33,12 @@ public class BenefitsView {
             long discount = promotionResult.get(promotion);
             if(discount == 0) continue;
 
-            String promotionMessage = promotion.getPromotionType().getMessage();
-            sb.append(String.format(OutputMessage.BENEFIT_DETAILS.getMessage(), promotionMessage, discount));
+            sb.append(String.format(OutputMessage.BENEFIT_DETAILS.getMessage(),
+                    promotion.getPromotionType().getMessage(), discount));
         }
+
+        if(sb.isEmpty())
+            return sb.append(OutputMessage.DOES_NOT_EXIST.getMessage());
         return sb;
     }
 }
