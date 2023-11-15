@@ -2,6 +2,67 @@
 
 <br>
 
+## 📁디렉토리 구조
+
+```
+📦src
+ ┣ 📂main
+ ┃ ┗ 📂java
+ ┃ ┃ ┗ 📂christmas
+ ┃ ┃ ┃ ┣ 📂constant
+ ┃ ┃ ┃ ┃ ┣ 📜Badge.java
+ ┃ ┃ ┃ ┃ ┣ 📜InputMessage.java
+ ┃ ┃ ┃ ┃ ┣ 📜Menu.java
+ ┃ ┃ ┃ ┃ ┣ 📜MenuType.java
+ ┃ ┃ ┃ ┃ ┣ 📜OutputMessage.java
+ ┃ ┃ ┃ ┃ ┣ 📜PromotionItem.java
+ ┃ ┃ ┃ ┃ ┗ 📜PromotionType.java
+ ┃ ┃ ┃ ┣ 📂controller
+ ┃ ┃ ┃ ┃ ┗ 📜ChristmasController.java
+ ┃ ┃ ┃ ┣ 📂domain
+ ┃ ┃ ┃ ┃ ┣ 📂promotion
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ChristmasPromotion.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜DdayPromotion.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜GiftPromotion.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜SpecialPromotion.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜WeekDayPromotion.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜WeekendPromotion.java
+ ┃ ┃ ┃ ┃ ┣ 📜Customer.java
+ ┃ ┃ ┃ ┃ ┗ 📜EventPlanner.java
+ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┃ ┣ 📜BenefitsStorage.java
+ ┃ ┃ ┃ ┃ ┗ 📜OrderMenu.java
+ ┃ ┃ ┃ ┣ 📂exception
+ ┃ ┃ ┃ ┃ ┣ 📜ErrorCode.java
+ ┃ ┃ ┃ ┃ ┣ 📜ExceptionHandler.java
+ ┃ ┃ ┃ ┃ ┗ 📜RetryExceptionHandler.java
+ ┃ ┃ ┃ ┣ 📂util
+ ┃ ┃ ┃ ┃ ┗ 📜Parser.java
+ ┃ ┃ ┃ ┣ 📂validator
+ ┃ ┃ ┃ ┃ ┗ 📜InputValidator.java
+ ┃ ┃ ┃ ┣ 📂view
+ ┃ ┃ ┃ ┃ ┣ 📜BenefitsView.java
+ ┃ ┃ ┃ ┃ ┣ 📜InputView.java
+ ┃ ┃ ┃ ┃ ┣ 📜OrderMenuView.java
+ ┃ ┃ ┃ ┃ ┗ 📜OutputView.java
+ ┃ ┃ ┃ ┗ 📜Application.java
+ ┗ 📂test
+ ┃ ┗ 📂java
+ ┃ ┃ ┗ 📂christmas
+ ┃ ┃ ┃ ┣ 📂domain
+ ┃ ┃ ┃ ┃ ┣ 📜CustomerTest.java
+ ┃ ┃ ┃ ┃ ┗ 📜EventPlannerTest.java
+ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┃ ┗ 📜BenefitsStorageTest.java
+ ┃ ┃ ┃ ┣ 📂exception
+ ┃ ┃ ┃ ┃ ┗ 📜RetryExceptionHandlerTest.java
+ ┃ ┃ ┃ ┣ 📂validator
+ ┃ ┃ ┃ ┃ ┗ 📜InputValidatorTest.java
+ ┃ ┃ ┃ ┗ 📜ApplicationTest.java
+```
+
+<br>
+
 ## ✨기능 목록
 
 ### 주문 받기 기능
