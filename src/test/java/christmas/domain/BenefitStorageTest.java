@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class BenefitsStorageTest {
+public class BenefitStorageTest {
 
     private static HashMap<ChristmasPromotion, Long> promotionResult;
 
@@ -20,9 +20,9 @@ public class BenefitsStorageTest {
     @DisplayName("총 혜택 금액 계산하는 기능 테스트")
     void testTotalBenefitAmount() {
         initPromotionResult();
-        BenefitsStorage benefitsStorage = new BenefitsStorage(20000, false, promotionResult);
+        BenefitStorage benefitStorage = new BenefitStorage(20000, false, promotionResult);
 
-        long totalBenefitAmount = benefitsStorage.totalBenefitAmount();
+        long totalBenefitAmount = benefitStorage.totalBenefitAmount();
 
         assertThat(totalBenefitAmount).isEqualTo(7446L);
     }
@@ -31,9 +31,9 @@ public class BenefitsStorageTest {
     @DisplayName("증정 메뉴 없는 경우 할인 후 결제금액 계산하는 기능 테스트")
     void testAfterDiscountAmountWithoutGiftMenu() {
         initPromotionResult();
-        BenefitsStorage benefitsStorage = new BenefitsStorage(20000, false, promotionResult);
+        BenefitStorage benefitStorage = new BenefitStorage(20000, false, promotionResult);
 
-        long afterDiscountAmount = benefitsStorage.afterDiscountAmount();
+        long afterDiscountAmount = benefitStorage.afterDiscountAmount();
 
         assertThat(afterDiscountAmount).isEqualTo(20000 - 7446);
     }
@@ -43,9 +43,9 @@ public class BenefitsStorageTest {
     void testAfterDiscountAmountWithGiftMenu() {
         initPromotionResult();
         promotionResult.put(new GiftPromotion(), 25000L);
-        BenefitsStorage benefitsStorage = new BenefitsStorage(300000, true, promotionResult);
+        BenefitStorage benefitStorage = new BenefitStorage(300000, true, promotionResult);
 
-        long afterDiscountAmount = benefitsStorage.afterDiscountAmount();
+        long afterDiscountAmount = benefitStorage.afterDiscountAmount();
 
         assertThat(afterDiscountAmount).isEqualTo(300000 - 7446);
     }
@@ -54,9 +54,9 @@ public class BenefitsStorageTest {
     @DisplayName("별 배지 결정 기능 테스트")
     void testDetermineBadgeWithStar() {
         initPromotionResult(6_000);
-        BenefitsStorage benefitsStorage = new BenefitsStorage(20_000, false, promotionResult);
+        BenefitStorage benefitStorage = new BenefitStorage(20_000, false, promotionResult);
 
-        Badge badge = benefitsStorage.determineBadge();
+        Badge badge = benefitStorage.determineBadge();
 
         assertThat(badge).isEqualTo(Badge.STAR);
     }
@@ -65,9 +65,9 @@ public class BenefitsStorageTest {
     @DisplayName("트리 배지 결정 기능 테스트")
     void testDetermineBadgeWithTree() {
         initPromotionResult(12_000);
-        BenefitsStorage benefitsStorage = new BenefitsStorage(20_000, false, promotionResult);
+        BenefitStorage benefitStorage = new BenefitStorage(20_000, false, promotionResult);
 
-        Badge badge = benefitsStorage.determineBadge();
+        Badge badge = benefitStorage.determineBadge();
 
         assertThat(badge).isEqualTo(Badge.TREE);
     }
@@ -76,9 +76,9 @@ public class BenefitsStorageTest {
     @DisplayName("산타 배지 결정 기능 테스트")
     void testDetermineBadgeWithSanta() {
         initPromotionResult(21_000);
-        BenefitsStorage benefitsStorage = new BenefitsStorage(20_000, false, promotionResult);
+        BenefitStorage benefitStorage = new BenefitStorage(20_000, false, promotionResult);
 
-        Badge badge = benefitsStorage.determineBadge();
+        Badge badge = benefitStorage.determineBadge();
 
         assertThat(badge).isEqualTo(Badge.SANTA);
     }
@@ -87,9 +87,9 @@ public class BenefitsStorageTest {
     @DisplayName("해당하는 배지가 없는 경우 테스트")
     void testDetermineBadgeWithNoBadge() {
         initPromotionResult(4_000);
-        BenefitsStorage benefitsStorage = new BenefitsStorage(4_000, false, promotionResult);
+        BenefitStorage benefitStorage = new BenefitStorage(4_000, false, promotionResult);
 
-        Badge badge = benefitsStorage.determineBadge();
+        Badge badge = benefitStorage.determineBadge();
 
         assertThat(badge).isEqualTo(Badge.NONE);
     }
