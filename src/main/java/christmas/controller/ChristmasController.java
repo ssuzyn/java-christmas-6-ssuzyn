@@ -1,7 +1,8 @@
 package christmas.controller;
 
 import christmas.constant.Menu;
-import christmas.dto.BenefitsStorage;
+import christmas.domain.BenefitStorage;
+import christmas.dto.BenefitResult;
 import christmas.domain.Customer;
 import christmas.domain.EventPlanner;
 import christmas.dto.OrderMenu;
@@ -46,14 +47,15 @@ public class ChristmasController {
         eventPlanner = new EventPlanner();
         eventPlanner.findPromotion(customer);
 
-        previewEventBenefits();
+        BenefitStorage benefitStorage = storeBenefits();
+        previewEventBenefits(benefitStorage);
     }
 
-    private BenefitsStorage storeBenefits(){
+    private BenefitStorage storeBenefits(){
         if(eventPlanner.hasGiftMenu()){
-            return new BenefitsStorage(customer.getTotalOrderAmount(), true, eventPlanner.getPromotionResult());
+            return new BenefitStorage(customer.getTotalOrderAmount(), true, eventPlanner.getPromotionResult());
         }
-        return new BenefitsStorage(customer.getTotalOrderAmount(), false, eventPlanner.getPromotionResult());
+        return new BenefitStorage(customer.getTotalOrderAmount(), false, eventPlanner.getPromotionResult());
     }
 
     private void displayOrder(int date, Map<Menu, Integer> menu){
@@ -62,9 +64,11 @@ public class ChristmasController {
     }
 
 
-    private void previewEventBenefits(){
-        BenefitsStorage benefitsStorage = storeBenefits();
-        OutputView.printPreview(benefitsStorage);
+    private void previewEventBenefits(BenefitStorage benefitStorage){
+        BenefitResult benefitResult = new BenefitResult(benefitStorage.getBeforeDiscountAmount(),
+                benefitStorage.isGiftMenu(), benefitStorage.getPromotionResult(), benefitStorage.totalBenefitAmount(),
+                benefitStorage.afterDiscountAmount(), benefitStorage.determineBadge());
+        OutputView.printPreview(benefitResult);
     }
 
 }

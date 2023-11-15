@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.domain;
 
 import christmas.constant.Badge;
 import christmas.constant.Menu;
@@ -6,12 +6,17 @@ import christmas.domain.promotion.ChristmasPromotion;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public record BenefitsStorage(
+public class BenefitStorage {
 
-        long beforeDiscountAmount,
-        boolean giftMenu,
-        HashMap<ChristmasPromotion, Long> promotionResult)
-{
+    private final long beforeDiscountAmount;
+    private final boolean giftMenu;
+    private final HashMap<ChristmasPromotion, Long> promotionResult;
+
+    public BenefitStorage(long beforeDiscountAmount, boolean giftMenu, HashMap<ChristmasPromotion, Long> promotionResult){
+        this.beforeDiscountAmount = beforeDiscountAmount;
+        this.giftMenu = giftMenu;
+        this.promotionResult = promotionResult;
+    }
 
     public long totalBenefitAmount() {
         return promotionResult.values().stream().mapToLong(Long::longValue).sum();
@@ -20,7 +25,7 @@ public record BenefitsStorage(
     public long afterDiscountAmount() {
         long totalBenefit = totalBenefitAmount();
 
-        if (giftMenu()) {
+        if (giftMenu) {
             totalBenefit -= Menu.CHAMPAGNE.getPrice();
         }
 
@@ -36,4 +41,15 @@ public record BenefitsStorage(
                 .orElse(Badge.NONE);
     }
 
+    public long getBeforeDiscountAmount() {
+        return beforeDiscountAmount;
+    }
+
+    public boolean isGiftMenu() {
+        return giftMenu;
+    }
+
+    public HashMap<ChristmasPromotion, Long> getPromotionResult() {
+        return promotionResult;
+    }
 }

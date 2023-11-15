@@ -4,7 +4,7 @@ import christmas.constant.Badge;
 import christmas.constant.Menu;
 import christmas.constant.OutputMessage;
 import christmas.domain.promotion.ChristmasPromotion;
-import christmas.dto.BenefitsStorage;
+import christmas.dto.BenefitResult;
 import christmas.dto.OrderMenu;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,13 +25,13 @@ public class OutputView {
         printOrderedMenu(orderMenu.menu());
     }
 
-    public static void printPreview(BenefitsStorage benefits){
+    public static void printPreview(BenefitResult benefits){
         printBeforeDiscountAmount(benefits.beforeDiscountAmount());
         printHasGift(benefits.giftMenu());
         printBenefitsDetail(benefits.beforeDiscountAmount(), benefits.promotionResult());
         printTotalBenefits(benefits.totalBenefitAmount());
         printAfterDiscountAmount(benefits.afterDiscountAmount());
-        printBadge(benefits.determineBadge());
+        printBadge(benefits.badge());
     }
 
     private static void printOrderedMenu(Map<Menu, Integer> orderMenu){
